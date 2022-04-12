@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// require("turbolinks").start() <- ブラウザ読み込みを高速化するアプリケーション. JSが読み込まれないケースがあるので、無効化する。
 require("@rails/activestorage").start()
 require("channels")
 
