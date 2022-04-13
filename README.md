@@ -17,34 +17,16 @@ application up and running.
 | nickname           | string  | null: false               |
 | email              | string  | null: false, unique: true |
 | encrypted_password | string  | null: false               |
-| lastname_Kanji     | string  | null: false               |
-| firstname_Kanji    | string  | null: false               |
-| lastname_Kana      | string  | null: false               |
-| firstname_Kana     | string  | null: false               |
-| birth_year_id      | integer | null: false               |
-| birth_month_id     | integer | null: false               |
-| birth_day_id       | integer | null: false               |
+| lastname_kanji     | string  | null: false               |
+| firstname_kanji    | string  | null: false               |
+| lastname_kana      | string  | null: false               |
+| firstname_kana     | string  | null: false               |
+| birth_date         | date    | null: false               |
 
 ### Association : users
 
 - has_many : items
-- has_many : purchases
-- has_one : birth_year
-- has_one : birth_month
-- has_one : birth_day
-
-### Association : Birth_year (ActiveHash)
-
-- belongs_to : user
-
-### Association : Birth_month (ActiveHash)
-
-- belongs_to : user
-
-### Association : Birth_day (ActiveHash)
-
-- belongs_to : user
-
+- has_many : purchase_histories
 
 ## Items テーブル
 
@@ -58,58 +40,69 @@ application up and running.
 | delivery_area_id | integer | null: false                    |
 | delivery_date_id | integer | null: false                    |
 | price            | integer | null: false                    |
-| user             | integer | null: false, foreign_key: true |
+| user             | reference | null: false, foreign_key: true |
 
 ### Association : items
 
 - belongs_to : user
-- has_one : purchase
-- has_one : category
-- has_one : condition
-- has_one : delivery_fee
-- has_one : delivery_area
-- has_one : delivery_date
+- has_one : purchase_history
+- belongs_to : category
+- belongs_to : condition
+- belongs_to : delivery_fee
+- belongs_to : prefecture
+- belongs_to : delivery_date
 
 ### Association : Category (ActiveHash)
 
-- belongs_to : item
+- has_many : item
 
 ### Association : Condition (ActiveHash)
 
-- belongs_to : item
+- has_many : item
 
 ### Association : Delivery_fee (ActiveHash)
 
-- belongs_to : item
-
-### Association : Delivery_area (ActiveHash)
-
-- belongs_to : item
-
-### Association : Delivery_date (ActiveHash)
-
-- belongs_to : item
-
-
-## Purchases テーブル
-
-| Column          | Type    | Options                        |
-| --------------- | ------  | ------------------------------ |
-| postal_code     | string  | null: false                    |
-| prefecture_id   | integer | null: false                    |
-| city            | string  | null: false                    |
-| house_number    | string  | null: false                    |
-| build_number    | string  | null: false                    |
-| phone_number    | string  | null: false                    |
-| user            | string  | null: false, foreign_key: true |
-| item            | string  | null: false, foreign_key: true |
-
-### Association : purchases
-
-- belongs_to : user
-- belongs_to : item
-- has_one : prefecture
+- has_many : item
 
 ### Association : Prefecture (ActiveHash)
 
-- belongs_to : purchase
+- has_many : item
+
+### Association : Delivery_date (ActiveHash)
+
+- has_many : item
+
+
+## Purchase_histories テーブル
+
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| user            | references | null: false, foreign_key: true |
+| item            | references | null: false, foreign_key: true |
+
+### Association : purchase-histories
+
+- belongs_to : user
+- belongs_to : item
+- has_one : purchase
+
+## Purchases テーブル
+
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| postal_code         | string     | null: false                    |
+| prefecture_id       | integer    | null: false                    |
+| city                | string     | null: false                    |
+| house_number        | string     | null: false                    |
+| build_number        | string     |                                |
+| phone_number        | string     | null: false                    |
+| purchase_history_id | references | null: false, foreign_key: true |
+
+### Association : purchases
+
+- belongs_to : purchase_history
+- belongs_to : prefecture
+
+### Association : Prefecture (ActiveHash)
+
+- has_many : purchases
