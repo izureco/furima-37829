@@ -30,17 +30,17 @@ application up and running.
 
 ## Items テーブル
 
-| Column           | Type    | Options                        |
-| ---------------- | ------  | ------------------------------ |
-| title            | string  | null: false                    |
-| description      | text    | null: false                    |
-| category_id      | integer | null: false                    |
-| condition_id     | integer | null: false                    |
-| delivery_fee_id  | integer | null: false                    |
-| delivery_area_id | integer | null: false                    |
-| delivery_date_id | integer | null: false                    |
-| price            | integer | null: false                    |
-| user             | reference | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| title            | string     | null: false                    |
+| description      | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| condition_id     | integer    | null: false                    |
+| delivery_fee_id  | integer    | null: false                    |
+| delivery_area_id | integer    | null: false                    |
+| delivery_date_id | integer    | null: false                    |
+| price            | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
 ### Association : items
 
@@ -54,23 +54,23 @@ application up and running.
 
 ### Association : Category (ActiveHash)
 
-- has_many : item
+- has_many : items
 
 ### Association : Condition (ActiveHash)
 
-- has_many : item
+- has_many : items
 
 ### Association : Delivery_fee (ActiveHash)
 
-- has_many : item
+- has_many : items
 
 ### Association : Prefecture (ActiveHash)
 
-- has_many : item
+- has_many : items
 
 ### Association : Delivery_date (ActiveHash)
 
-- has_many : item
+- has_many : items
 
 
 ## Purchase_histories テーブル
@@ -101,8 +101,3 @@ application up and running.
 ### Association : purchases
 
 - belongs_to : purchase_history
-- belongs_to : prefecture
-
-### Association : Prefecture (ActiveHash)
-
-- has_many : purchases
