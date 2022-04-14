@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   # 正規表現を用いて、"全角カナ"かどうか判定
-  with_options presence: true, format:{ with: /\A[ァ-ヶ]+\z/, message: "全角カナを使用してください" } do
+  with_options presence: true, format:{ with: /\A[ァ-ヶー]+\z/, message: "全角カナを使用してください" } do
     validates :lastname_kana
     validates :firstname_kana
   end

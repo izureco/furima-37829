@@ -13,7 +13,6 @@ RSpec.describe User, type: :model do
     end
 
     context '新規登録できないとき -異常系-' do
-      # ユーザー情報の異常系テスト
       it 'nicknameが空では登録できない' do
         @user.nickname=nil
         @user.valid?
@@ -54,14 +53,19 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'passwordが英数字混合でないと登録できない' do
+      it 'passwordが英字のみの場合は登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含んでください")
+      end
+      it 'passwordが数字のみの場合は登録できない' do
         @user.password = '111111'
         @user.password_confirmation = @user.password
         @user.valid?
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含んでください")
       end
 
-      # 本人情報の異常系テスト
       it '全角名前は苗字が存在しないと登録できない' do
         @user.lastname_kanji = nil
         @user.valid?
