@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 // require("turbolinks").start() <- ブラウザ読み込みを高速化するアプリケーション. JSが読み込まれないケースがあるので、無効化する。
 require("@rails/activestorage").start()
 require("channels")
+require("../price")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
