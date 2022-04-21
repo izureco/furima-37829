@@ -1,15 +1,14 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item
   before_action :move_to_index
 
   def new
-    @item = Item.find(params[:item_id])
     @purchase = PurchasePhistory.new
       # URIパターンがネストして、item_idがパスに含まれているから。paramsにはitem_id
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase = PurchasePhistory.new(ph_params)
     if @purchase.valid?
       pay_item
@@ -22,6 +21,10 @@ class PurchasesController < ApplicationController
 
   private
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+  
   def ph_params
     params.require(:purchase_phistory).permit(
       :postal_code,
