@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_one :purchase_history
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -9,12 +10,14 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :delivery_date
 
+  # NOT NULL制約
   with_options presence: true do
     validates :title
     validates :description
     validates :image
   end
 
+  # 正規表現制約
   validates :price, presence: true,
     format:{ with: /\A[0-9]+\z/},
     numericality:{ only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }

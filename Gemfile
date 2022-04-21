@@ -68,3 +68,5 @@ end
 
 gem 'active_hash'
 gem 'gimei'
+
+gem 'payjp'

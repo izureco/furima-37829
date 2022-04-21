@@ -52,9 +52,12 @@ class ItemsController < ApplicationController
 
   def move_to_index
     if user_signed_in?
-      item_user = Item.find(params[:id])
-      unless current_user.id == item_user.user_id
-        redirect_to action: :index
+      item = Item.find(params[:id])
+      unless current_user.id == item.user_id
+        redirect_to action: :index and return
+      end
+      if PurchaseHistory.exists?(item_id: item.id)
+        redirect_to action: :index and return
       end
     end
   end
