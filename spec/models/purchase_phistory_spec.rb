@@ -58,12 +58,12 @@ RSpec.describe PurchasePhistory, type: :model do
       it 'phone_numberが10桁以下だと保存できないこと' do
         @purchase.phone_number = "000"
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+        expect(@purchase.errors.full_messages).to include("Phone number is invalid")
       end
       it 'phone_numberが11桁以上だと保存できないこと' do
-        @purchase.phone_number = "111111111111111"
+        @purchase.phone_number = "1111111111111111111"
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@purchase.errors.full_messages).to include("Phone number is invalid")
       end
       it 'tokenが空(カード情報が正しく入力されていない)だと保存できないこと' do
         @purchase.token = nil
