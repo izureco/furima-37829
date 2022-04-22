@@ -124,32 +124,33 @@
     </div>
     <ul class='item-lists'>
 
-      <% if @items != nil %>
+      <% if @items[0] != nil %>
         <% @items.each do |item| %>
           <li class='list'>
             <%= link_to item_path(item.id) do %>
               <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
-            <% end %>
-            <% if PurchaseHistory.exists?(item_id: item.id) %>
-              <div class="sold-out">
-                <span>Sold Out!!</span>
-              </div>
-            <% end %>
-            </div>
-            <div class='item-info'>
-              <h3 class='item-name'>
-                <%= item.title %>
-              </h3>
-              <div class='item-price'>
-                <% fee = DeliveryFee.find_by(id: item.delivery_fee_id) %>
-                <span><%= item.price %>円<br><%= fee.name %></span>
-                <div class='star-btn'>
-                  <%= image_tag "star.png", class:"star-icon" %>
-                  <span class='star-count'>0</span>
+              <% if PurchaseHistory.exists?(item_id: item.id) %>
+                <div class="sold-out">
+                  <span>Sold Out!!</span>
                 </div>
+              <% end %>
               </div>
+              <div class='item-info'>
+                <h3 class='item-name'>
+                  <%= item.title %>
+                </h3>
+                <div class='item-price'>
+                  <% fee = DeliveryFee.find_by(id: item.delivery_fee_id) %>
+                  <span><%= item.price %>円<br><%= fee.name %></span>
+                  <div class='star-btn'>
+                    <%= image_tag "star.png", class:"star-icon" %>
+                    <span class='star-count'>0</span>
+                  </div>
+                </div>
+            <% end %>
             </div>
+
           </li>
         <% end %>
 
