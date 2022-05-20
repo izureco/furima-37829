@@ -1,7 +1,41 @@
-# README
+# アプリケーション名
+ユーザーが思い思いの商品を売買できるフリーマーケットアプリケーション FURIMA
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# アプリケーション概要
+Tech Campの最終課題として、アプリケーションを作成
+
+# 実装機能
+- ユーザー管理機能
+- 商品出品機能
+- 商品購入機能
+
+# DEMO
+URL : https://furima-37829.herokuapp.com/
+GitHub : https://github.com/izureco/furima-37829
+
+# 動作確認方法
+- WebブラウザGoogle Chromeの最新版を利用してアクセスしてください。
+- ただしデプロイ等で接続できないタイミングもございます。その際は少し時間をおいてから接続してください。
+- 接続先およびログイン情報については、下記の通りです。
+- 同時に複数の方がログインしている場合に、ログインできない可能性があります。
+- テストアカウントでログイン→トップページから出品ボタン押下→商品情報入力→商品出品
+- 確認後、ログアウト処理をお願いします。
+
+## ID/Pass
+- ID: admin
+- Pass: 1111
+
+## テスト用アカウント
+<購入者用>
+- メールアドレス: b@gmail.com
+- パスワード: 111111a
+<購入用カード情報>
+- 番号：4242424242424242
+- 期限：Thu Nov 01 2029 00:00:00 GMT+0900 (JST)
+- セキュリティコード：123
+<出品者用>
+- メールアドレス名: a@a
+- パスワード: 111111a
 
 # テーブル設計
 ## 必要機能
@@ -45,33 +79,6 @@ application up and running.
 ### Association : items
 
 - belongs_to : user
-- has_one : purchase_history
-- belongs_to : category
-- belongs_to : condition
-- belongs_to : delivery_fee
-- belongs_to : prefecture
-- belongs_to : delivery_date
-
-### Association : Category (ActiveHash)
-
-- has_many : items
-
-### Association : Condition (ActiveHash)
-
-- has_many : items
-
-### Association : Delivery_fee (ActiveHash)
-
-- has_many : items
-
-### Association : Prefecture (ActiveHash)
-
-- has_many : items
-
-### Association : Delivery_date (ActiveHash)
-
-- has_many : items
-
 
 ## Purchase_histories テーブル
 
@@ -101,3 +108,16 @@ application up and running.
 ### Association : purchases
 
 - belongs_to : purchase_history
+
+# 開発環境
+- Ruby 2.6.5p114
+- Rails 6.0.4.7
+- MySQL Ver 14.14
+- Github 2.30.1
+- VScode 1.66.2
+
+# ローカルでの動作方法
+git clone https://github.com/izureco/furima-37829.git
+
+# 作成者
+[@izureco]https://github.com/izureco
